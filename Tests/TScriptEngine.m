@@ -88,7 +88,7 @@
 
 - (void)invocationCallback:(NSString *)arg1 andString:(NSString *)arg2 andDate:(NSDate *)arg3
 {
-//    GHTestLog(@"Callback from Invocation %@ %@ %@", arg1, arg2, arg3);
+    GHTestLog(@"Callback from Invocation %@ %@ %@", arg1, arg2, arg3);
 	
 	[self notify:kGHUnitWaitStatusSuccess];
 }
@@ -163,14 +163,14 @@
 
 - (void)callbackNoArgs
 {
-//    NSLog(@"Callback() from JavaScript");
+    GHTestLog(@"Callback() from JavaScript");
     
     [self notify:kGHUnitWaitStatusSuccess];
 }
 
 - (void)callbackOneArg:(NSString *)theArgument
 {
-//    NSLog(@"Callback(%@) from JavaScript", theArgument);
+    GHTestLog(@"Callback(%@) from JavaScript", theArgument);
 
     NSInteger status = ([theArgument isKindOfClass:[NSString class]]) 
         ? kGHUnitWaitStatusSuccess 
@@ -180,7 +180,7 @@
 
 - (void)callbackTypedArgs:(NSDate *)dateArg boolArg:(BOOL)boolArg intArg:(NSInteger)intArg floatArg:(CGFloat)floatArg
 {
-//    NSLog(@"Callback(%@, %d, %d, %f) from JavaScript", dateArg, (int)boolArg, (int)intArg, floatArg);
+    GHTestLog(@"Callback(%@, %d, %d, %f) from JavaScript", dateArg, (int)boolArg, (int)intArg, floatArg);
 
     NSInteger status = kGHUnitWaitStatusSuccess;
     
