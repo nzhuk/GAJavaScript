@@ -180,7 +180,7 @@
 
 - (void)callbackTypedArgs:(NSDate *)dateArg boolArg:(BOOL)boolArg intArg:(NSInteger)intArg floatArg:(CGFloat)floatArg
 {
-//    NSLog(@"Callback(%@, %c, %d, %f) from JavaScript", dateArg, boolArg, intArg, floatArg);
+//    NSLog(@"Callback(%@, %d, %d, %f) from JavaScript", dateArg, (int)boolArg, (int)intArg, floatArg);
 
     NSInteger status = kGHUnitWaitStatusSuccess;
     
