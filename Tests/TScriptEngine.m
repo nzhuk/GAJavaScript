@@ -193,4 +193,39 @@
     [self notify:status];
 }
 
+
+// Test cases for ObjC -> JS -> ObjC -> JS communication
+
+- (void)testCallbackFromJSToObjCToJS
+{
+	[self prepare:@selector(callbackFromJSToObjC:)];
+	
+	[_engine callFunction:@"testCallbackFromJSToObjC"];
+	
+	[self waitForStatus:kGHUnitWaitStatusSuccess timeout:1.0];
+}
+
+- (void)callbackFromJSToObjC:(NSString *)jsCallback
+{
+	[self notify:kGHUnitWaitStatusSuccess];
+	
+	// jsCallback must be called asynchronously
+	[self performSelector:@selector(performJSCallback:) withObject:jsCallback afterDelay:0.0];
+}
+
+- (void)performJSCallback:(NSString *)jsCallback
+{
+	[self prepare:@selector(informReceivedJSCallbackWithFirstValue:secondValue:)];
+	
+	[_engine callFunction:jsCallback withArguments:[NSArray arrayWithObjects:@"value1", @"value2", nil]];
+	
+	[self waitForStatus:kGHUnitWaitStatusSuccess timeout:1.0];
+}
+
+- (void)informReceivedJSCallbackWithFirstValue:(NSString *)firstValue secondValue:(NSString *)secondValue
+{
+	NSInteger status = ([firstValue isEqualToString:@"value1"] && [secondValue isEqualToString:@"value2"]) ? kGHUnitWaitStatusSuccess : kGHUnitWaitStatusFailure;
+    [self notify:status];
+}
+
 @end

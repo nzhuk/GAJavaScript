@@ -55,6 +55,17 @@
         function testThrowException () {
             return window.fake.object;  // Will throw a TypeError
         }
+		
+		// Calls ObjC method and passes it a JavaScript callback which ObjC will call asynchronously.
+		function testCallbackFromJSToObjC () {
+            GAJavaScript.performSelector('callbackFromJSToObjC:', 'jsCallbackFunction');
+        }
+
+		// This function will be called by ObjC
+		function jsCallbackFunction(val1, val2) {
+           GAJavaScript.performSelector('informReceivedJSCallbackWithFirstValue:secondValue:', val1, val2);
+        }
+
     </script>
 </head>
 <body>
