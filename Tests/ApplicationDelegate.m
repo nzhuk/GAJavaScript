@@ -31,6 +31,8 @@
 	
 	[window_ addSubview:webView];	
 
+	[webView release];
+	
     _scriptEngine = [[GAScriptEngine alloc] initWithWebView:webView];
     
     NSString* filePath = [[NSBundle mainBundle] pathForResource:@"TestWebViewContent" ofType:@"html"];
